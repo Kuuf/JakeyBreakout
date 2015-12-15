@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -39,6 +40,7 @@ public class BreakoutGame extends Game {
     public static gameOverMenu gameOverMenu = new gameOverMenu();
     public static boolean resetPaddle = false;
     public static boolean commandFromMainMenu = false;
+   // public static Shape intersection = Brick.intersection;
 
     public static Paddle paddle = new Paddle();
     /**
@@ -63,8 +65,8 @@ public class BreakoutGame extends Game {
     };
 
     /**
-     * performs certain actions after each level
-     * called when needing a timed task
+     * performs certain actions after each level called when needing a timed
+     * task
      */
     public void execute(TimerTask task, long time) {
         new Timer() {
@@ -273,12 +275,17 @@ public class BreakoutGame extends Game {
 
     @Override
     public void update(Game game, GameTime gameTime) {
+       /* intersection = Brick.intersection;
+        if (Ball.bounceNum > 0) {
+            this.getSceneNodes().getChildren().add(intersection);
+        }
+               */
 
         //lets paddle follow ball exactly for testing
         if (resetGame) {
             resetGame();
         }
-        
+
         //updates the paddle, allowing it to move
         paddle.update(game, gameTime);
 
@@ -295,7 +302,6 @@ public class BreakoutGame extends Game {
                 }
             }
 
-            
             if (lives == 0 && !gameOver) {
                 gameOver = true;
                 gameOver();
